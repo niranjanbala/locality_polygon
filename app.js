@@ -25,7 +25,7 @@ if (cluster.isMaster) {
 
     var mongoose = require('mongoose');
     //connect to local mongodb database    
-    mongoose.connect(process.env.MONGOLAB_URI);
+    //mongoose.connect(process.env.MONGOLAB_URI);
     //attach lister to connected event
     mongoose.connection.once('connected', function() {
     });
@@ -55,6 +55,8 @@ if (cluster.isMaster) {
     app.set('port', process.env.PORT || 3000);
     var region= require('./region');
     app.use('/region', region);
+    var search= require('./search');
+    app.use('/search', search);
     // Bind to a port
     app.listen(app.get('port'));
     console.log('Worker ' + cluster.worker.id + ' running!');
