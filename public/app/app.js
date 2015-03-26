@@ -108,7 +108,18 @@ var AppView = Backbone.View.extend({
       // hide all controls
       self.controls.hide();
       self.controls.css({top: '80%'});
-      var list_view = new ListingView();
+      var listings = new ListingResults();
+      listings.fetch({
+        success : function(data){
+          var list_view = new ListingView({model:data.attributes.listing_details});
+            //console.log(data.attributes.listing_details);
+         }
+      });
+      
+         
+       
+
+      //var list_view = new ListingView();
 
     }
 });
