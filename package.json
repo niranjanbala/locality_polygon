@@ -2,12 +2,13 @@
   "name": "cfx-maps",
   "version": "0.0.1",
   "dependencies": {
+    "compression": "~1.4.3",
     "express": "*",
     "mapnik": "*",
-    "compression": "~1.4.3",
-    "step": "0.0.5",
     "mongodb": "*",
-    "mongoose": ""
+    "mongoose": "",
+    "request": "^2.54.0",
+    "step": "0.0.5"
   },
   "main": "app.js",
   "scripts": {
