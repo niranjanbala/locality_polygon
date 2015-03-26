@@ -5,7 +5,9 @@
     "express": "*",
     "mapnik": "*",
     "compression": "~1.4.3",
-    "step": "0.0.5"
+    "step": "0.0.5",
+    "mongodb": "*",
+    "mongoose": ""
   },
   "main": "app.js",
   "scripts": {

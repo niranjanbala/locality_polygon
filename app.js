@@ -23,6 +23,14 @@ if (cluster.isMaster) {
 // Code to run if we're in a worker process
 } else {
 
+    var mongoose = require('mongoose');
+    //connect to local mongodb database    
+    mongoose.connect(process.env.DATABASE_URL);
+    console.log(process.env.DATABASE_URL);
+    //attach lister to connected event
+    mongoose.connection.once('connected', function() {
+    });
+
     // Include Express
     var express = require('express');
     var path = require('path');
