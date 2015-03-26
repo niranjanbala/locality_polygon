@@ -1,2 +1,78 @@
-Hello World:wq
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Google Maps</title>
+  <link rel="stylesheet" href="css/style.css"/>
+  
+  <link rel="stylesheet" href="css/bootstrap.min.css "/>
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&amp;subset=latin,latin-ext">
+  <script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+</head>
+ <body>
+<!-- begin template -->
+<div class="navbar navbar-custom navbar-fixed-top">
+ <div class="navbar-header"><a class="navbar-brand" href="#">CF[x]</a>
+      <a class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </a>
+    </div>
+    <div class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>&nbsp;</li>
+      </ul>
+      <form class="navbar-form">
+        <div class="form-group" style="display:inline;">
+          <div class="input-group">
+            <div class="input-group-btn">
+              <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-chevron-down"></span></button>
+              <ul class="dropdown-menu">
+                <li><a href="#">Rent</a></li>
+                <li><a href="#">Buy</a></li>
+              </ul>
+            </div>
+            <input type="text" class="form-control" placeholder="What are searching for?">
+            <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span> </span>
+          </div>
+        </div>
+      </form>
+    </div>
+</div>
+      <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav" id="listing">
+            </ul>
+        </div>
+        <!-- /#sidebar-wrapper -->
+  <div id="hub" class="">
+    <div id="companies_holder">
+      <button id="btn_pop_new_company" class="btn"><i class="icon-plus"></i> New company</button>
+      <button id="btn_delete_all_companies" class="btn btn-danger"><i class="icon-remove icon-white"></i> Remove them all</button>
+      <div id="companies_list_holder"><ul></ul></div>
+    </div>
+    <div id="map_canvas">map div</div>
+  </div>
 
+
+
+  <!-- vendor libraries -->
+  <script src="app/js/libraries/jquery-1.7.1.js"></script>
+  <script src="app/js/libraries/underscore.js"></script>
+  <script src="app/js/libraries/backbone.js"></script>
+  <script src="app/js/libraries/bootstrap.min.js"></script>
+  <script src="app/js/scripts/gmap.utfgrid.js"></script>
+  <script src="app/js/scripts/gmap.imageTile.js"></script>
+
+
+  <!-- app -->
+    <script src="app/views/listingView.js"></script>
+
+  <script src="app/app.js"></script>
+
+  
+
+  
+</body>
+</html>
