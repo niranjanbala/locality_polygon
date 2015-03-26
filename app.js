@@ -45,9 +45,10 @@ if (cluster.isMaster) {
     app.get('/', function (req, res) {
         res.send(index);
     });
+    app.set('port', process.env.PORT || 3000);
     var region= require('./region');
     app.use('/region', region);
     // Bind to a port
-    app.listen(4000);
+    app.listen(app.get('port'));
     console.log('Worker ' + cluster.worker.id + ' running!');
 }
