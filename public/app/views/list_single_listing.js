@@ -4,7 +4,7 @@
 
 var ListingSingleView = Backbone.View.extend({
   tagName : 'li',
-  
+
   //template : _.template('app/templates/listingItem.html'),
 
   initialize: function(options) {    
@@ -19,6 +19,7 @@ var ListingSingleView = Backbone.View.extend({
   events: {
     'mouseover a': 'show_listing_info',
     'mouseout a': 'hide_listing_info',
+    'click a ' : 'show_listing_details'
   },
 
   show_listing_info : function() {
@@ -30,6 +31,17 @@ var ListingSingleView = Backbone.View.extend({
     if(this.marker_view != undefined){
       this.marker_view.hide_listing_info.call(this.marker_view.marker);
     }
+  },
+  show_listing_details : function(){
+    var temp = $.get('app/templates/listingDetails.html', function (data) {
+            template = _.template(data, {});
+            var modal = new Backbone.BootstrapModal({
+                    content: template,
+                    title: 'modal header',
+                    animate: true
+            });
+            modal.open(function(){ console.log('clicked OK') });
+        }, 'html');
   },
 
   // END Events and event handlers
