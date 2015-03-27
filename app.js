@@ -25,7 +25,7 @@ if (cluster.isMaster) {
 
     var mongoose = require('mongoose');
     //connect to local mongodb database    
-    //mongoose.connect(process.env.MONGOLAB_URI);
+    mongoose.connect(process.env.MONGOLAB_URI);
     //attach lister to connected event
     mongoose.connection.once('connected', function() {
     });

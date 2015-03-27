@@ -26,7 +26,11 @@ var AppView = Backbone.View.extend({
 
 
     map : null,
-
+    locationBoundary :  new google.maps.Polygon({
+      fillOpacity: 0.3,
+      strokeColor:"#FF0000",
+      strokeWeight: 0.2,
+    }),
     show_content: function() { //triggers "content" mode
      
     },
@@ -45,7 +49,7 @@ var AppView = Backbone.View.extend({
     //--------------------------------------
     // Initialise map
     //--------------------------------------
-    _initialize_map : function() {
+    _initialize_map : function(bounds) {
       var center = new google.maps.LatLng(12.9719400, 77.5936900);
       var mapOptions = {
           zoom: 9,
@@ -54,8 +58,7 @@ var AppView = Backbone.View.extend({
       };
       map = new google.maps.Map(document.getElementById('map_canvas'),
         mapOptions);
-      
-
+      map.fitBounds(bounds);
       //Adding new tile
       var imageMapType = new ImageTiles (map, {baseURL: 'http://ec2-54-69-79-243.us-west-2.compute.amazonaws.com:4000/tile/sale/{Z}/{X}/{Y}.png?layerName=listings'});
       map.overlayMapTypes.push(imageMapType);
@@ -66,21 +69,18 @@ var AppView = Backbone.View.extend({
       utfGrid.on('mouseover', function (o) {
         if (o.data && o.data.name) {
           var content = "<div class='infowindow'>";
-                content += "<div class='col-md-3'><img class='img-hover' src='img/placeholder.jpg' style='width:70px;height:70px;' /> </div>"; 
-                content +="<div class='col-md-9' style='text-align:left;'>";
-                  content += "<table>";
-                    content +="<tr><th>Apartment: </th><td>" + o.data.name + "</td></tr>";
-                    content +="<tr><th>Latitude: </th><td>" + o.latLng.lat() + "</td></tr>";
-                    content += "<tr><th>Longitude:</th><td> " + o.latLng.lng() + "</td></tr>";
-                  content+="</table>";
-                content +="</div>";
-              content += "</div>";
-            
+          content += "<div class='col-md-3'><img class='img-hover' src='img/placeholder.jpg' style='width:70px;height:70px;' /> </div>"; 
+          content +="<div class='col-md-9' style='text-align:left;'>";
+          content += "<table>";
+          content +="<tr><th>Apartment: </th><td>" + o.data.name.replace("in","") + "</td></tr>";
+          content +="<tr><th>Latitude: </th><td>" + o.data.title + "</td></tr>";
+          content += "<tr><th>Longitude:</th><td> " + o.latLng.lng() + "</td></tr>";
+          content+="</table>";
+          content +="</div>";
+          content += "</div>";
           self._handleInfoWindow(o.latLng, content);
           
-       } else {
-        
-      }
+       }
     }, utfGrid);
 
       utfGrid.on('mouseout', function (o) {
@@ -90,6 +90,10 @@ var AppView = Backbone.View.extend({
 
       // Add UTFGrid to map
       utfGrid.setMap(map);
+      this.locationBoundary.setMap(map);
+      google.maps.event.addListener(this.locationBoundary, "mousemove", function(e){
+        google.maps.event.trigger(map, 'mousemove', e);
+      });
     },
     _handleInfoWindow: function(latLng, content){
       this.infoWindow.setContent(content);
@@ -111,7 +115,16 @@ var AppView = Backbone.View.extend({
       self.header = $('header');
       
       // initialize map
-      self._initialize_map();
+      $.get( "bangalore.json", function( data ) {
+        var path = new google.maps.MVCArray;
+        var bounds = new google.maps.LatLngBounds(); 
+        data[0].point.forEach(function(point){
+          path.insertAt(path.length, new google.maps.LatLng(point.lat, point.lng));
+          bounds.extend(new google.maps.LatLng(point.lat, point.lng));
+        });
+        self.locationBoundary.setPaths(new google.maps.MVCArray([path]));
+        self._initialize_map(bounds);
+      });
 
       // Initial control positions
       // Move header up (out of window)
@@ -125,15 +138,8 @@ var AppView = Backbone.View.extend({
       listings.fetch({
         success : function(data){
           var list_view = new ListingView({model:data.attributes.listing_details,map:self.map});
-            //console.log(data.attributes.listing_details);
          }
       });
-      
-         
-       
-
-      //var list_view = new ListingView();
-
     }
 });
 
