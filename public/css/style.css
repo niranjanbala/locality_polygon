@@ -333,3 +333,27 @@ width:130px;
 .btn-group button{
     background: transparent !important;
 }
+
+.image-div-modal{
+    height:200px;
+    width:300px;
+    margin:15px 15px 15px 70px;
+
+}
+.details-table-modal tr th{
+   width:200px;
+   text-align: right;
+}
+
+.details-table-modal tr td, .details-table-modal tr th{
+    border:none !important;
+
+}
+.accordion-heading a{color:white;}
+
+.accordion-heading{
+    background:#f68121;
+    width:100%;
+    padding: 10px;
+    margin-bottom: 5px;
+}
