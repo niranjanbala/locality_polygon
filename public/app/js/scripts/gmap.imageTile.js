@@ -5,7 +5,9 @@ function ImageTiles (map, options) {
       self.maxZoom = 20;
       self.minZoom = 6;
       self.baseURL = options.baseURL;
-      
+      self.setBaseURL = function(url){
+        self.baseURL = url;
+      };
       self.getTile = function(coord, zoom, ownerDocument) {
         if (zoom < self.minZoom || zoom > self.maxZoom) {
             return ownerDocument.createElement('div');

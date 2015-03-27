@@ -24,7 +24,7 @@
     <ul class="nav navbar-nav">
       <li>&nbsp;</li>
     </ul>
-    <form class="navbar-form">
+    <form class="navbar-form" id="filters">
       <div class="form-group" style="display:inline;">
         <div class="input-group">
           <div class="input-group-btn">
@@ -34,7 +34,7 @@
               <li><a href="#">Buy</a></li>
             </ul>
           </div>
-          <input type="text" class="txtbox form-control" placeholder="What are searching for?">
+          <input type="text" id="demo2" class="txtbox form-control typeahead" placeholder="What are searching for?"   >
           <!-- <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span> </span> -->
         </div>
       </div>
@@ -71,6 +71,8 @@
 <script src="app/js/libraries/backbone.bootstrap-modal.js"></script>
 <script src="app/js/scripts/gmap.utfgrid.js"></script>
 <script src="app/js/scripts/gmap.imageTile.js"></script>
+<script src="http://plugins.upbootstrap.com/assets/js/bootstrap-typeahead.min.js" type="text/javascript"></script>
+
 
 
 <!-- app -->
@@ -93,9 +95,8 @@
         $('#sidebar-wrapper').animate({
             right:"350px"
         });     
-});
-
-
+  }); 
+      
 
 </script>
 
