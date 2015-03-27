@@ -12,5 +12,5 @@ router.get('/locality/list', function(req, res){
 	polygon.find({},function(err, localityList){
 		res.jsonp(localityList);
 	});
-})
+});
 module.exports = router;
