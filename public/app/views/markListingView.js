@@ -27,17 +27,25 @@ var MarkListingView = Backbone.View.extend({
         	content: self.marker.title
       });
 
-      //google.maps.event.addListener(self.marker, 'mouseover', self.show_company_info);
-      //google.maps.event.addListener(self.marker, 'mouseout', self.hide_company_info);
-      //google.maps.event.addListener(self.marker, 'click', self.show_company_detail);
+      google.maps.event.addListener(self.marker, 'mouseover', self.show_listing_info);
+      google.maps.event.addListener(self.marker, 'mouseout', self.hide_listing_info);
+      google.maps.event.addListener(self.marker, 'click', self.show_listing_detail);
   },
 
   //----------------------------------
   // Events and event handlers
   //Add Click and hover events
-  events: {
+  show_listing_detail : function() {
+      this.infowindow.close();
+      App.show_content();
+    },
+    hide_listing_info : function() {
+      this.infowindow.close();
+    },
+    show_listing_info : function() {
+      this.infowindow.open(this.map, this);
+    },
 
-  },
 
   // END Events and event handlers
   //----------------------------------

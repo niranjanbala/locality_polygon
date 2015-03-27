@@ -1,21 +1,20 @@
-<script type="text/template" id="listingItemTemplate">
-consloe.log('hello');
 
-<li class="listing-container">
-      <div class="listing-thumb">
-        <img src="<%= images.small >" />
+  <% var f = attributes.default_title.split("in"); %> 
+  <li class="listing-container">
+    <a href="#">
+      <div class="listing-thumb"> 
+        <img src="<%= attributes.images.small %>" /> 
       </div>
-      <div class="listing-info">                
-        <div class="listing-header">
-          2 BHK , Furnished
+      <div class="listing-info">
+        <div class="listing-header"> 
+          <%= f[0] %> 
         </div>
         <div class="listing-subDetails">
-          Sarjapur, Bangalore
+          <%= f[1] %>
         </div>
         <div class="listing-price">
-          12,000
+           12,000
         </div>
-      </div>  
-
-    </li>
-</script>
+     </div>
+    </a>
+  </li>

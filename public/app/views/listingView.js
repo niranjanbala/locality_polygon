@@ -12,28 +12,21 @@ var ListingView =  Backbone.View.extend({
 	appendListing : function(listing) {
 		//Render Each element from the view
 		var self = this;
-		console.log("Length:  " + self.latlongs.length)
+		var renderMarker;
 		if(self.latlongs.length === 0) {
 			self.latlongs.push([listing.attributes.lat,listing.attributes.lng]);
-			var renderMarker = new MarkListingView({model:listing.attributes,map:self.map,latlongs:self.latlongs});
+			renderMarker = new MarkListingView({model:listing.attributes,map:self.map,latlongs:self.latlongs});
 		}
 
 		for(var i=0;i < self.latlongs.length ;i++){
-			console.log(self.latlongs[i][0] != listing.attributes.lat);
 			if(self.latlongs[i][0] != listing.attributes.lat) {
 				self.latlongs.push([listing.attributes.lat,listing.attributes.lng]);
-				var renderMarker = new MarkListingView({model:listing.attributes,map:self.map,latlongs:self.latlongs})
+				renderMarker = new MarkListingView({model:listing.attributes,map:self.map,latlongs:self.latlongs})
 				break;
 			}
-			else {
-				console.log("Found");
-			}
 		}
-		//console.log(self.latlongs);
-
-		var renderListing = new ListingSingleView({model:listing});
-		
-		$(this.$el).append(renderListing.render().el)
+		var renderListing = new ListingSingleView({model:listing,marker:renderMarker});
+		$(this.$el).append(renderListing.el)
 	},
 
 	render: function() {

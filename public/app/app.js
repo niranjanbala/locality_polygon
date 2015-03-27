@@ -53,18 +53,18 @@ var AppView = Backbone.View.extend({
       
 
       //Adding new tile
-      var imageMapType = new ImageTiles (map, {baseURL: 'http://ec2-54-69-79-243.us-west-2.compute.amazonaws.com:4000/tile/sale/{Z}/{X}/{Y}.png?layerName=apartments'});
+      var imageMapType = new ImageTiles (map, {baseURL: 'http://ec2-54-69-79-243.us-west-2.compute.amazonaws.com:4000/tile/sale/{Z}/{X}/{Y}.png?layerName=listings'});
       map.overlayMapTypes.push(imageMapType);
       //Adding Grid Layer on top of that
       var self = this;
-      var utfGrid = new UtfGrid('http://ec2-54-69-79-243.us-west-2.compute.amazonaws.com:4000/tile/sale/{z}/{x}/{y}.json?layerName=apartments&callback={cb}');
+      var utfGrid = new UtfGrid('http://ec2-54-69-79-243.us-west-2.compute.amazonaws.com:4000/tile/sale/{z}/{x}/{y}.json?layerName=listings&callback={cb}');
       //On mouse Hover show the Grid
       utfGrid.on('mouseover', function (o) {
-        if (o.data && o.data.hovertext) {
-          var content = "<div class='infowindow'>";
+        if (o.data && o.data.name) {
+          var content = "<div class='row infowindow'>";
           content += "Latitude: " + o.latLng.lat() + "<br/>";
           content += "Longitude: " + o.latLng.lng() + "</div>";
-          content += "Apartment: " + o.data.hovertext + "</div>";
+          content += "Apartment: " + o.data.name + "</div>";
           self._handleInfoWindow(o.latLng, content);
           
        } else {
@@ -117,12 +117,6 @@ var AppView = Backbone.View.extend({
             //console.log(data.attributes.listing_details);
          }
       });
-      
-         
-       
-
-      //var list_view = new ListingView();
-
     }
 });
 
