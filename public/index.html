@@ -11,6 +11,7 @@
 </head>
 <body>
   <!-- begin template -->
+  <div class="container-fluid">
   <div class="navbar navbar-custom navbar-fixed-top">
    <div class="navbar-header"><a class="navbar-brand" href="#">CF[x]</a>
     <a class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -33,18 +34,20 @@
               <li><a href="#">Buy</a></li>
             </ul>
           </div>
-          <input type="text" class="form-control" placeholder="What are searching for?">
-          <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span> </span>
+          <input type="text" class="txtbox form-control" placeholder="What are searching for?">
+          <!-- <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span> </span> -->
         </div>
       </div>
     </form>
   </div>
 </div>
 <!-- Sidebar -->
-<div id="sidebar-wrapper">
-  <ul class="sidebar-nav" id="listing">
-  </ul>
-</div>
+
+
+    <div id="sidebar-wrapper">
+        <div id="close-open" class="close-open">Toggle</div>
+        <ul class="sidebar-nav" id="listing"> </ul>
+    </div>
 <!--
 <div id="listing-details">
 <a class="btn-close exit" href="/in/rent/search" title="Close">
@@ -77,8 +80,25 @@
 
 <script src="app/app.js"></script>
 
+<script type="text/javascript">
+
+  $('#close-open').toggle(
+    function(){
+        $('#sidebar-wrapper').animate({
+            right:"20px"
+        });
+    },
+    function(){
+        $('#sidebar-wrapper').animate({
+            right:"350px"
+        });     
+});
 
 
 
+</script>
+
+
+</div>
 </body>
 </html>

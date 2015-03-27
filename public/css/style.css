@@ -13,7 +13,8 @@ author: bootply.com
 }
 
 .navbar-custom {
-	background-color: #168ccc;
+	/*background-color: #168ccc;*/
+    background:#f68121;
     color:#fff;
 }
 
@@ -125,14 +126,15 @@ body{
     position: fixed;
     right: 350px;
     width: 0;
-    height: 100%;
-    max-height: 600px;
+    height: 600px;
+    padding-top:10px;
+    padding-bottom:10px;
     
     overflow-y: scroll;
     margin-right: -350px;
     margin-top: 50px;
-
-    background: #FFF;
+/*
+    background: #FFF;*/
     -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
     -o-transition: all 0.5s ease;
@@ -156,40 +158,68 @@ body{
 
 /* Sidebar Styles */
 
+.close-open{
+    overflow: hidden;
+    position: absolute;
+    z-index: 20;
+    background: #f68121;
+    padding: 5px;
+    cursor: pointer;
+}
+
+
+
+
+
 .sidebar-nav {
     position: absolute;
     top: 0;
     width: 350px;
     margin: 0;
-    padding: 0;
+    padding: 10px 10px;
     list-style: none;
 }
 
+.sidebar-nav>li{
+padding: 5px 5px;
+overflow: hidden;
+height: auto;
+background: white;
+margin-top:3px;
+box-shadow: inset 0 2px 0 rgba(255,255,255,.3), 0 2px 4px rgba(0,0,0,.4);
+}
+
+.sidebar-nav>li:hover{background:#f68121;}
 
 
-.sidebar-nav li a {
+.sidebar-nav >li a {
     display: block;
     text-decoration: none;
     color: black;
+    height: auto;
+    overflow: hidden;
+
 }
 
 #listing{
-    padding-top: 20px;
+    padding-top: 10px;
 }
 .listing-container{
-   background: white;
+   /*background: white;*/
    display: inline-block;
    list-style: none;
    position: relative;
    width: 100%;
-   border-bottom: 1px solid #e6e6e6
+   height: auto;
+   overflow: hidden;
+  /* border-bottom: 1px solid #e6e6e6*/
 }
 .listing-container a {
   cursor: pointer;
   display: block;
   text-decoration: none;
   position: relative;
-  margin: 12px;
+  /*margin: 12px;*/
 
 }
 .listing-info {
@@ -227,6 +257,9 @@ body{
 }
 .listing-info .listing-subDetails {
     font-size 13px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
 
 }
 .listing-info .listing-price {
@@ -277,4 +310,8 @@ body{
         position: relative;
         margin-right: 0;
     }
+}
+
+.txtbox{
+    width:300px !important;
 }
