@@ -324,3 +324,12 @@ box-shadow: inset 0 2px 0 rgba(255,255,255,.3), 0 2px 4px rgba(0,0,0,.4);
 .txtbox{
     width:300px !important;
 }
+
+.input-group .btn-group{
+    height: 40px !important;
+width:130px;
+}
+
+.btn-group button{
+    background: transparent !important;
+}

@@ -3,7 +3,7 @@ var polygon=require('./model/polygon');
 var router = express.Router();
 router.get('/locality/:localityId/polygon.json',function(req,res) {
 	polygon.findOne({
-		"area_public_id":req.params.localityId
+		"area_id":req.params.localityId
 	}, function(err, polygonData){
 		res.jsonp(polygonData);
 	});

@@ -20,18 +20,19 @@ var App = null;
       'blur #demo2': 'load_polygon',
     },
     infoWindow : new google.maps.InfoWindow({
-      maxWidth: 350
+      maxWidth: 250
     }),
 
     map : null,
 
     imageMapType : null,
 
+    utfGrid : null,
 
     locationBoundary :  new google.maps.Polygon({
-      fillOpacity: 0.1,
-      strokeColor:"red",
-      strokeWeight: 0.2,
+      fillOpacity: 0.0,
+      strokeColor:"#FF0000",
+      strokeWeight: 3,
     }),
     show_content: function() { //triggers "content" mode
 
@@ -57,7 +58,8 @@ var App = null;
     $.get('http://localhost:3000/region/locality/'+item+'/polygon.json',function(data) {
       //Change URL
       console.log(data);
-      self.imageMapType.setBaseURL('http://ec2-54-69-79-243.us-west-2.compute.amazonaws.com:4000/tile/sale/{Z}/{X}/{Y}.png?layerName=listings&area_id='+data.area_id)
+      self.imageMapType.setBaseURL('http://ec2-54-69-79-243.us-west-2.compute.amazonaws.com:4000/tile/sale/{Z}/{X}/{Y}.png?layerName=listings&area_id='+data.area_id);
+      self.utfGrid.setURL('http://ec2-54-69-79-243.us-west-2.compute.amazonaws.com:4000/tile/sale/{z}/{x}/{y}.json?layerName=listings&callback={cb}&area_id='+data.area_id);
       var decodedPath = google.maps.geometry.encoding.decodePath(data.locality_polygon); 
       var decodedLevels = self._decodeLevels("BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB");
       self.locationBoundary.setPaths(decodedPath);
@@ -94,16 +96,16 @@ var App = null;
       map.overlayMapTypes.push(this.imageMapType);
       //Adding Grid Layer on top of that
       var self = this;
-      var utfGrid = new UtfGrid('http://ec2-54-69-79-243.us-west-2.compute.amazonaws.com:4000/tile/sale/{z}/{x}/{y}.json?layerName=listings&callback={cb}');
+      this.utfGrid = new UtfGrid('http://ec2-54-69-79-243.us-west-2.compute.amazonaws.com:4000/tile/sale/{z}/{x}/{y}.json?layerName=listings&callback={cb}');
       //On mouse Hover show the Grid
-      utfGrid.on('mouseover', function (o) {
+      this.utfGrid.on('mouseover', function (o) {
         if (o.data && o.data.name) {
+          console.log(o.data);
           var content = "<div class='infowindow'>";
           content += "<div class='col-md-3'><img class='img-hover' src='img/placeholder.jpg' style='width:70px;height:70px;' /> </div>"; 
-          content +="<div class='col-md-9' style='text-align:left;'>";
+          content +="<div class='col-md-4' style='text-align:left;'>";
           content += "<table>";
-          content +="<tr><th>Apartment: </th><td>" + o.data.name.replace("in","") + "</td></tr>";
-          content +="<tr><th>Latitude: </th><td>" + o.data.title + "</td></tr>";
+          content +="<tr><th> " + o.data.title + "</th></tr>";
           content += "<tr><th>Longitude:</th><td> " + o.latLng.lng() + "</td></tr>";
           content+="</table>";
           content +="</div>";
@@ -111,15 +113,15 @@ var App = null;
           self._handleInfoWindow(o.latLng, content);
           
         }
-      }, utfGrid);
+      }, this.utfGrid);
 
-      utfGrid.on('mouseout', function (o) {
+      this.utfGrid.on('mouseout', function (o) {
         // do something with o.data and o.latLng
         self.infoWindow.close();
-      }, utfGrid);
+      }, this.utfGrid);
 
       // Add UTFGrid to map
-      utfGrid.setMap(map);
+      this.utfGrid.setMap(map);
       this.locationBoundary.setMap(map);
       google.maps.event.addListener(this.locationBoundary, "mousemove", function(e){
         google.maps.event.trigger(map, 'mousemove', e);

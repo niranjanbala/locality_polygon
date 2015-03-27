@@ -2,6 +2,9 @@
 // Here goes nothing:
 function UtfGrid(url, options) {
   var self = this; 
+  self.setURL = function(url){
+    self._url = url; 
+  };
 
   this.options = {
     subdomains: 'abc',
@@ -17,7 +20,7 @@ function UtfGrid(url, options) {
   this._mouseOn = null;
   this._url = url;
   this._cache = {};
-
+  
   //Find a unique id in window we can use for our callbacks
   //Required for jsonP
   var i = 0;
