@@ -70,16 +70,15 @@ var AppView = Backbone.View.extend({
       utfGrid.on('mouseover', function (o) {
         if (o.data && o.data.name) {
           var content = "<div class='infowindow'>";
-                content += "<div class='col-md-3'><img class='img-hover' src='img/placeholder.jpg' style='width:70px;height:70px;' /> </div>"; 
-                content +="<div class='col-md-9' style='text-align:left;'>";
-                  content += "<table>";
-                    content +="<tr><th>Apartment: </th><td>" + o.data.name + "</td></tr>";
-                    content +="<tr><th>Latitude: </th><td>" + o.latLng.lat() + "</td></tr>";
-                    content += "<tr><th>Longitude:</th><td> " + o.latLng.lng() + "</td></tr>";
-                  content+="</table>";
-                content +="</div>";
-              content += "</div>";
-            
+          content += "<div class='col-md-3'><img class='img-hover' src='img/placeholder.jpg' style='width:70px;height:70px;' /> </div>"; 
+          content +="<div class='col-md-9' style='text-align:left;'>";
+          content += "<table>";
+          content +="<tr><th>Apartment: </th><td>" + o.data.name + "</td></tr>";
+          content +="<tr><th>Latitude: </th><td>" + o.latLng.lat() + "</td></tr>";
+          content += "<tr><th>Longitude:</th><td> " + o.latLng.lng() + "</td></tr>";
+          content+="</table>";
+          content +="</div>";
+          content += "</div>";
           self._handleInfoWindow(o.latLng, content);
           
        } else {
@@ -142,12 +141,6 @@ var AppView = Backbone.View.extend({
             //console.log(data.attributes.listing_details);
          }
       });
-      
-         
-       
-
-      //var list_view = new ListingView();
-
     }
 });
 
