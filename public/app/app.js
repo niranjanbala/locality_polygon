@@ -27,9 +27,9 @@ var AppView = Backbone.View.extend({
 
     map : null,
     locationBoundary :  new google.maps.Polygon({
-      fillOpacity: 0.3,
+      fillOpacity: 0.0,
       strokeColor:"#FF0000",
-      strokeWeight: 0.2,
+      strokeWeight: 1,
     }),
     show_content: function() { //triggers "content" mode
      
