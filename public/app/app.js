@@ -58,7 +58,6 @@ var AppView = Backbone.View.extend({
       };
       map = new google.maps.Map(document.getElementById('map_canvas'),
         mapOptions);
-      this.locationBoundary.setMap(map);
       map.fitBounds(bounds);
       //Adding new tile
       var imageMapType = new ImageTiles (map, {baseURL: 'http://ec2-54-69-79-243.us-west-2.compute.amazonaws.com:4000/tile/sale/{Z}/{X}/{Y}.png?layerName=listings'});
@@ -93,6 +92,10 @@ var AppView = Backbone.View.extend({
 
       // Add UTFGrid to map
       utfGrid.setMap(map);
+      this.locationBoundary.setMap(map);
+      google.maps.event.addListener(this.locationBoundary, "mousemove", function(e){
+        google.maps.event.trigger(map, 'mousemove', e);
+      });
     },
     _handleInfoWindow: function(latLng, content){
       this.infoWindow.setContent(content);
@@ -120,8 +123,7 @@ var AppView = Backbone.View.extend({
         data[0].point.forEach(function(point){
           path.insertAt(path.length, new google.maps.LatLng(point.lat, point.lng));
           bounds.extend(new google.maps.LatLng(point.lat, point.lng));
-        })
-        console.log(bounds);
+        });
         self.locationBoundary.setPaths(new google.maps.MVCArray([path]));
         self._initialize_map(bounds);
       });
@@ -138,7 +140,6 @@ var AppView = Backbone.View.extend({
       listings.fetch({
         success : function(data){
           var list_view = new ListingView({model:data.attributes.listing_details,map:self.map});
-            //console.log(data.attributes.listing_details);
          }
       });
     }
