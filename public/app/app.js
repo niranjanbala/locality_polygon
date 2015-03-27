@@ -19,8 +19,12 @@ var AppView = Backbone.View.extend({
       'click #btn_map' : 'show_map'
     },
     infoWindow : new google.maps.InfoWindow({
-        maxWidth: 420
+        maxWidth: 350
     }),
+
+  
+
+
     map : null,
 
     show_content: function() { //triggers "content" mode
@@ -53,18 +57,25 @@ var AppView = Backbone.View.extend({
       
 
       //Adding new tile
-      var imageMapType = new ImageTiles (map, {baseURL: 'http://ec2-54-69-79-243.us-west-2.compute.amazonaws.com:4000/tile/sale/{Z}/{X}/{Y}.png?layerName=apartments'});
+      var imageMapType = new ImageTiles (map, {baseURL: 'http://ec2-54-69-79-243.us-west-2.compute.amazonaws.com:4000/tile/sale/{Z}/{X}/{Y}.png?layerName=listings'});
       map.overlayMapTypes.push(imageMapType);
       //Adding Grid Layer on top of that
       var self = this;
-      var utfGrid = new UtfGrid('http://ec2-54-69-79-243.us-west-2.compute.amazonaws.com:4000/tile/sale/{z}/{x}/{y}.json?layerName=apartments&callback={cb}');
+      var utfGrid = new UtfGrid('http://ec2-54-69-79-243.us-west-2.compute.amazonaws.com:4000/tile/sale/{z}/{x}/{y}.json?layerName=listings&callback={cb}');
       //On mouse Hover show the Grid
       utfGrid.on('mouseover', function (o) {
-        if (o.data && o.data.hovertext) {
+        if (o.data && o.data.name) {
           var content = "<div class='infowindow'>";
-          content += "Latitude: " + o.latLng.lat() + "<br/>";
-          content += "Longitude: " + o.latLng.lng() + "</div>";
-          content += "Apartment: " + o.data.hovertext + "</div>";
+                content += "<div class='col-md-3'><img class='img-hover' src='img/placeholder.jpg' style='width:70px;height:70px;' /> </div>"; 
+                content +="<div class='col-md-9' style='text-align:left;'>";
+                  content += "<table>";
+                    content +="<tr><th>Apartment: </th><td>" + o.data.name + "</td></tr>";
+                    content +="<tr><th>Latitude: </th><td>" + o.latLng.lat() + "</td></tr>";
+                    content += "<tr><th>Longitude:</th><td> " + o.latLng.lng() + "</td></tr>";
+                  content+="</table>";
+                content +="</div>";
+              content += "</div>";
+            
           self._handleInfoWindow(o.latLng, content);
           
        } else {

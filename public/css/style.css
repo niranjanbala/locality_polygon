@@ -40,13 +40,22 @@ body{
 	
 }
 .infowindow {
-    background: white;
+    /*background: #cdcdcd;*/
     display: inline-block;
     position: relative;
     width: 100%;
     border-radius: 5px;
-    
+    /*box-shadow: inset 0 2px 0 rgba(255,255,255,.3), 0 2px 4px rgba(0,0,0,.4);*/
 }
+
+/*.infowindow .col-md-3, .infowindow .col-md-9{
+    border:1px solid red;
+}*/
+
+.infowindow b{
+    align:left;
+}
+
 #hub header {
 	position: absolute;
 	color: #333333;
