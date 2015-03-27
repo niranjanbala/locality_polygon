@@ -20,7 +20,7 @@ var App = null;
       'blur #demo2': 'load_polygon',
     },
     infoWindow : new google.maps.InfoWindow({
-      maxWidth: 250
+      maxWidth: 350
     }),
 
     map : null,
@@ -31,7 +31,7 @@ var App = null;
 
     locationBoundary :  new google.maps.Polygon({
       fillOpacity: 0.0,
-      strokeColor:"#FF0000",
+      strokeColor:"#757575",
       strokeWeight: 3,
     }),
     show_content: function() { //triggers "content" mode
@@ -100,18 +100,35 @@ var App = null;
       //On mouse Hover show the Grid
       this.utfGrid.on('mouseover', function (o) {
         if (o.data && o.data.name) {
-          console.log(o.data);
           var content = "<div class='infowindow'>";
           content += "<div class='col-md-3'><img class='img-hover' src='img/placeholder.jpg' style='width:70px;height:70px;' /> </div>"; 
           content +="<div class='col-md-4' style='text-align:left;'>";
           content += "<table>";
-          content +="<tr><th> " + o.data.title + "</th></tr>";
+          content +="<tr><th>Apartment: </th><td>" + o.data.name.replace("in","") + "</td></tr>";
+          content +="<tr><th>Latitude: </th><td>" + o.data.title + "</td></tr>";
           content += "<tr><th>Longitude:</th><td> " + o.latLng.lng() + "</td></tr>";
           content+="</table>";
           content +="</div>";
           content += "</div>";
           self._handleInfoWindow(o.latLng, content);
           
+        }
+      }, this.utfGrid);
+      this.utfGrid.on('click', function (o) {
+        if (o.data && o.data.name) {
+          consloe.log(o.data.name);
+           var temp = $.get('app/templates/listingDetails.html', function (data) {
+            template = _.template(data, {});
+            var modal = new Backbone.BootstrapModal({
+                    content: template,
+                    title: 'modal header',
+                    animate: true
+            });
+            modal.open(function(){ console.log('clicked OK') });
+        }, 'html');
+
+        } else {
+          console.log('Nothing');
         }
       }, this.utfGrid);
 
@@ -127,6 +144,7 @@ var App = null;
         google.maps.event.trigger(map, 'mousemove', e);
       });
     },
+
     _handleInfoWindow: function(latLng, content){
       this.infoWindow.setContent(content);
       this.infoWindow.setPosition(latLng);
@@ -173,7 +191,7 @@ var App = null;
         }
       });
      }, 2000);
-      $('#demo2').typeahead({
+      $('#locality').typeahead({
         onSelect : function(item){
           self._load_polygon(item.value)
         },

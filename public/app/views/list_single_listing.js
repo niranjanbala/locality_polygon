@@ -37,7 +37,7 @@ var ListingSingleView = Backbone.View.extend({
             template = _.template(data, {});
             var modal = new Backbone.BootstrapModal({
                     content: template,
-                    title: 'modal header',
+                    title: 'Listing Details',
                     animate: true
             });
             modal.open(function(){ console.log('clicked OK') });
