@@ -38,7 +38,14 @@ body{
 	font: 300 60px "Helvetica Neue", Helvetica, Arial, sans-serif;
 	
 }
-
+.infowindow {
+    background: white;
+    display: inline-block;
+    position: relative;
+    width: 100%;
+    border-radius: 5px;
+    
+}
 #hub header {
 	position: absolute;
 	color: #333333;

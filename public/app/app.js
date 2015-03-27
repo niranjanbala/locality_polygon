@@ -50,6 +50,8 @@ var AppView = Backbone.View.extend({
       };
       map = new google.maps.Map(document.getElementById('map_canvas'),
         mapOptions);
+      
+
       //Adding new tile
       var imageMapType = new ImageTiles (map, {baseURL: 'http://ec2-54-69-79-243.us-west-2.compute.amazonaws.com:4000/tile/sale/{Z}/{X}/{Y}.png?layerName=apartments'});
       map.overlayMapTypes.push(imageMapType);
@@ -111,7 +113,7 @@ var AppView = Backbone.View.extend({
       var listings = new ListingResults();
       listings.fetch({
         success : function(data){
-          var list_view = new ListingView({model:data.attributes.listing_details});
+          var list_view = new ListingView({model:data.attributes.listing_details,map:self.map});
             //console.log(data.attributes.listing_details);
          }
       });

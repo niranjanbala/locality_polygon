@@ -24,7 +24,7 @@ var ListingSingleView = Backbone.View.extend({
   render: function() {
     //console.log(this.listing.attributes);
     //this.$el.html('<li><a href="#" >'+ this.listing.attributes.default_title+'</a></li>')
-    console.log(this.listing.attributes);
+    //console.log(this.listing.attributes);
     this.$el.html(this.template(this.listing.attributes));
     return this;
   }
