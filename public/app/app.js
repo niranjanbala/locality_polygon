@@ -55,7 +55,7 @@ var App = null;
  _load_polygon : function(item){
     console.log(item);
     var self = this;
-    $.get('http://localhost:3000/region/locality/'+item+'/polygon.json',function(data) {
+    $.get('http://cfx-map.herokuapp.com/region/locality/'+item+'/polygon.json',function(data) {
       //Change URL
       console.log(data);
       self.imageMapType.setBaseURL('http://ec2-54-69-79-243.us-west-2.compute.amazonaws.com:4000/tile/sale/{Z}/{X}/{Y}.png?layerName=listings&area_id='+data.area_id);
@@ -195,7 +195,7 @@ var App = null;
         onSelect : function(item){
           self._load_polygon(item.value)
         },
-        ajax:'http://localhost:3000/region/locality/list',
+        ajax:'http://cfx-map.herokuapp.com/region/locality/list',
         display: 'name',
         val: 'area_id'
       });
