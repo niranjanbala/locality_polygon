@@ -102,11 +102,11 @@ var App = null;
         if (o.data && o.data.name) {
           var content = "<div class='infowindow'>";
           content += "<div class='col-md-3'><img class='img-hover' src='img/placeholder.jpg' style='width:70px;height:70px;' /> </div>"; 
-          content +="<div class='col-md-4' style='text-align:left;'>";
+          content +="<div class='col-md-9' style='text-align:left;'>";
           content += "<table>";
-          content +="<tr><th>Apartment: </th><td>" + o.data.name.replace("in","") + "</td></tr>";
-          content +="<tr><th>Latitude: </th><td>" + o.data.title + "</td></tr>";
-          content += "<tr><th>Longitude:</th><td> " + o.latLng.lng() + "</td></tr>";
+          content +="<tr><th>Title:</th><td>" + o.data.title.split("for")[0]  + "</td></tr>";
+          content +="<tr><th>Apartment:</th><td>" + o.data.name.replace("in","") + "</td></tr>";
+          content += "<tr><th>Price:</th><td> " + o.data.expected_amount_inr + "</td></tr>";
           content+="</table>";
           content +="</div>";
           content += "</div>";
