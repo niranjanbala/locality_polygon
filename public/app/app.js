@@ -55,7 +55,7 @@ var App = null;
  _load_polygon : function(item){
     console.log(item);
     var self = this;
-    $.get('http://localhost:3000/region/locality/'+item+'/polygon.json',function(data) {
+    $.get('http://cfx-map.herokuapp.com/region/locality/'+item+'/polygon.json',function(data) {
       //Change URL
       console.log(data);
       self.imageMapType.setBaseURL('http://ec2-54-69-79-243.us-west-2.compute.amazonaws.com:4000/tile/sale/{Z}/{X}/{Y}.png?layerName=listings&area_id='+data.area_id);
@@ -102,11 +102,11 @@ var App = null;
         if (o.data && o.data.name) {
           var content = "<div class='infowindow'>";
           content += "<div class='col-md-3'><img class='img-hover' src='img/placeholder.jpg' style='width:70px;height:70px;' /> </div>"; 
-          content +="<div class='col-md-4' style='text-align:left;'>";
+          content +="<div class='col-md-9' style='text-align:left;'>";
           content += "<table>";
-          content +="<tr><th>Apartment: </th><td>" + o.data.name.replace("in","") + "</td></tr>";
-          content +="<tr><th>Latitude: </th><td>" + o.data.title + "</td></tr>";
-          content += "<tr><th>Longitude:</th><td> " + o.latLng.lng() + "</td></tr>";
+          content +="<tr><th>Title:</th><td>" + o.data.title.split("for")[0]  + "</td></tr>";
+          content +="<tr><th>Apartment:</th><td>" + o.data.name.replace("in","") + "</td></tr>";
+          content += "<tr><th>Price:</th><td> " + o.data.expected_amount_inr + "</td></tr>";
           content+="</table>";
           content +="</div>";
           content += "</div>";
@@ -195,7 +195,7 @@ var App = null;
         onSelect : function(item){
           self._load_polygon(item.value)
         },
-        ajax:'http://localhost:3000/region/locality/list',
+        ajax:'http://cfx-map.herokuapp.com/region/locality/list',
         display: 'name',
         val: 'area_id'
       });
