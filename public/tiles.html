@@ -36,11 +36,11 @@
       var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
 
       // Add underlying imagery
-      var imageMapType = new ImageTiles (map, {baseURL: 'http://ec2-54-69-79-243.us-west-2.compute.amazonaws.com:4000/tile/sale/{Z}/{X}/{Y}.png?layerName=listings'});
+      var imageMapType = new ImageTiles (map, {baseURL: 'https://cfx-tiles.herokuapp.com//tile/sale/{Z}/{X}/{Y}.png?layerName=listings'});
       map.overlayMapTypes.push(imageMapType);
 
       // Add UTFGrid
-      var utfGrid = new UtfGrid('http://ec2-54-69-79-243.us-west-2.compute.amazonaws.com:4000/tile/sale/{z}/{x}/{y}.json?layerName=listings&callback={cb}&');
+      var utfGrid = new UtfGrid('https://cfx-tiles.herokuapp.com//tile/sale/{z}/{x}/{y}.json?layerName=listings&callback={cb}&');
 
       // Add interactions
       utfGrid.on('click', function (o) {
